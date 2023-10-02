@@ -127,7 +127,7 @@ class _SignInState extends State<SignIn> {
                       const SizedBox(height: 40),
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                           width: double.infinity,
                           decoration: const BoxDecoration(
                               color: ProjectColors.white,
@@ -188,7 +188,7 @@ class _SignInState extends State<SignIn> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: ProjectColors.black),
+                                      borderSide: const BorderSide(color: ProjectColors.black),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
@@ -259,7 +259,7 @@ class _SignInState extends State<SignIn> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: ProjectColors.black),
+                                      borderSide: const BorderSide(color: ProjectColors.black),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
@@ -335,7 +335,7 @@ class _SignInState extends State<SignIn> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: ProjectColors.black),
+                                      borderSide: const BorderSide(color: ProjectColors.black),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
@@ -520,7 +520,7 @@ class _SignInState extends State<SignIn> {
                                       onTap: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         "Login Here",
                                         style: TextStyle(color: ProjectColors.deepPurple),
                                       ),

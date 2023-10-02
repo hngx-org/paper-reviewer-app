@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatelessWidget {
-  String? title;
+  final String? title;
   final String? message;
   final VoidCallback? onConfirm;
 
-  CustomAlertDialog({
-    this.title, this.message, this.onConfirm,
-  });
+  const CustomAlertDialog({
+    Key? key,
+    this.title,
+    this.message,
+    this.onConfirm,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +19,8 @@ class CustomAlertDialog extends StatelessWidget {
       content: Text(message!),
       actions: <Widget>[
         TextButton(
-          child: Text('OK'),
           onPressed: onConfirm,
+          child: const Text('OK'),
         ),
       ],
     );
