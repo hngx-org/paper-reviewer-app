@@ -3,15 +3,15 @@ import 'package:hng_authentication/authentication.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/auth_models/auth_base_response_model.dart';
 
 import 'package:pepples_paper_review_ai/screens/authentication_screen/login_screen.dart';
-import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
+// import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
 
 import '../../constants/colors.dart';
-import '../../constants/routes/routes.dart';
+// import '../../constants/routes/routes.dart';
 import '../../widgets/custom_alert_box.dart';
 import 'auth_models/user_model.dart';
 
-import '../../constants/colors.dart';
-import '../../constants/routes/routes.dart';
+// import '../../constants/colors.dart';
+// import '../../constants/routes/routes.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
