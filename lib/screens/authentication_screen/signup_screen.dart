@@ -16,7 +16,7 @@ class RegistrationForm extends StatefulWidget {
   });
 
   @override
-  _RegistrationFormState createState() => _RegistrationFormState();
+  State<RegistrationForm> createState() => _RegistrationFormState();
 }
 
 class _RegistrationFormState extends State<RegistrationForm> {

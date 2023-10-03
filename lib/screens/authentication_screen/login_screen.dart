@@ -4,7 +4,7 @@ import 'package:hng_authentication/widgets/widget.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/signup_screen.dart';
 import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../constants/colors.dart';
+// import '../../constants/colors.dart';
 // import '../../constants/routes/routes.dart';
 
 class LoginScreen extends StatefulWidget {
