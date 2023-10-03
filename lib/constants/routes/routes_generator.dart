@@ -21,7 +21,7 @@ class RouteGenerator {
       case AppRoutes.login:
         return buildRoute(const LoginScreen(), settings: settings);
       case AppRoutes.signup:
-        return buildRoute(const SignIn(), settings: settings);
+        return buildRoute(const RegisterScreen(), settings: settings);
       case AppRoutes.payment:
         return buildRoute(const PaymentScreen(), settings: settings);
       case AppRoutes.paymentMehod:

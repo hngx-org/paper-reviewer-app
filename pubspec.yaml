@@ -19,7 +19,7 @@ dependencies:
   http: ^1.1.0
   shared_preferences: ^2.2.1
   animated_text_kit: ^4.2.2
-  hng_authentication: ^0.0.3
+  hng_authentication: ^0.1.0
   provider: ^6.0.5
 
 dev_dependencies:

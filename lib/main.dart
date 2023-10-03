@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/splash_screen.dart';
+import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +12,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen()
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/firstScreen': (context) => const ChatPage(),
+        // '/secondScreen': (context) => SecondScreen(),
+        // '/thirdScreen': (context) => ThirdScreen(),
+      },
     );
   }
 }
