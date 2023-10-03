@@ -13,7 +13,7 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<types.Message> _messages = [];
+  final List<types.Message> _messages = [];
   final _user = const types.User(
     id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
   );
@@ -27,7 +27,8 @@ class _ChatPageState extends State<ChatPage> {
     // Navigate to the login screen
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => SplashScreen(), // Replace with your login screen widget
+        builder: (context) =>
+            const SplashScreen(), // Replace with your login screen widget
       ),
     );
   }
@@ -43,8 +44,8 @@ class _ChatPageState extends State<ChatPage> {
                 backgroundColor: MaterialStateProperty.all(Colors.black),
               ),
               onPressed: _handleLogout, // Add this onPressed callback
-              icon: Icon(Icons.logout),
-              label: Text('Logout'),
+              icon: const Icon(Icons.logout),
+              label: const Text('Logout'),
             ),
           ],
         ),

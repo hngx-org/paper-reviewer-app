@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../constants/routes/routes.dart';
 import '../../constants/colors.dart';
+
 class PaymentMehodScreen extends StatefulWidget {
   const PaymentMehodScreen({super.key});
 
@@ -23,14 +24,15 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+
     return Scaffold(
-       resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Payment Method",
-        style: TextStyle(
-          color: ProjectColors.black,
-        ),
+        title: const Text(
+          "Payment Method",
+          style: TextStyle(
+            color: ProjectColors.black,
+          ),
         ),
         leading: const BackButton(),
         backgroundColor: ProjectColors.white,
@@ -53,7 +55,8 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                 ),
                 decoration: BoxDecoration(
                   border: _type == 1
-                      ? Border.all(width: 1, color: ProjectColors.maxLightPurple)
+                      ? Border.all(
+                          width: 1, color: ProjectColors.maxLightPurple)
                       : Border.all(
                           width: 0.3,
                           color: Colors.grey,
@@ -79,8 +82,7 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                                   ? const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
-                                      color: ProjectColors.black
-                                    )
+                                      color: ProjectColors.black)
                                   : const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
@@ -88,11 +90,10 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                                     )),
                         ],
                       ),
-                      const SizedBox(width: 230,),
-                     const Icon(
-                      FontAwesomeIcons.amazon
-                     )
-        
+                      const SizedBox(
+                        width: 230,
+                      ),
+                      const Icon(FontAwesomeIcons.amazon)
                     ],
                   ),
                 ),
@@ -108,7 +109,10 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                 ),
                 decoration: BoxDecoration(
                   border: _type == 2
-                      ? Border.all(width: 1, color: ProjectColors.maxLightPurple,)
+                      ? Border.all(
+                          width: 1,
+                          color: ProjectColors.maxLightPurple,
+                        )
                       : Border.all(
                           width: 0.3,
                           color: Colors.grey,
@@ -143,12 +147,14 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                                     )),
                         ],
                       ),
-                       const SizedBox(width: 200,),
-                     const Icon(FontAwesomeIcons.ccVisa),
+                      const SizedBox(
+                        width: 200,
+                      ),
+                      const Icon(FontAwesomeIcons.ccVisa),
                       const SizedBox(
                         width: 8,
                       ),
-                     const Icon(FontAwesomeIcons.ccMastercard)
+                      const Icon(FontAwesomeIcons.ccMastercard)
                     ],
                   ),
                 ),
@@ -164,10 +170,11 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                 ),
                 decoration: BoxDecoration(
                   border: _type == 3
-                      ? Border.all(width: 1, color:ProjectColors.maxLightPurple)
+                      ? Border.all(
+                          width: 1, color: ProjectColors.maxLightPurple)
                       : Border.all(
                           width: 0.3,
-                          color:Colors.grey,
+                          color: Colors.grey,
                         ),
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.transparent,
@@ -183,14 +190,14 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                             value: 3,
                             groupValue: _type,
                             onChanged: _handleRadio,
-                            activeColor:  ProjectColors.maxLightPurple,
+                            activeColor: ProjectColors.maxLightPurple,
                           ),
                           Text("PayPal",
                               style: _type == 3
                                   ? const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
-                                      color:ProjectColors.black,
+                                      color: ProjectColors.black,
                                     )
                                   : const TextStyle(
                                       fontSize: 15,
@@ -199,7 +206,9 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                                     )),
                         ],
                       ),
-                       const SizedBox(width: 260,),
+                      const SizedBox(
+                        width: 260,
+                      ),
                       const Icon(FontAwesomeIcons.ccPaypal)
                     ],
                   ),
@@ -216,7 +225,8 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                 ),
                 decoration: BoxDecoration(
                   border: _type == 4
-                      ? Border.all(width: 1, color: ProjectColors.maxLightPurple)
+                      ? Border.all(
+                          width: 1, color: ProjectColors.maxLightPurple)
                       : Border.all(
                           width: 0.3,
                           color: Colors.grey,
@@ -251,7 +261,9 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
                                     )),
                         ],
                       ),
-                       const SizedBox(width: 230,),
+                      const SizedBox(
+                        width: 230,
+                      ),
                       const Icon(FontAwesomeIcons.googlePay)
                     ],
                   ),
@@ -260,24 +272,23 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
               const SizedBox(
                 height: 100,
               ),
-               MaterialButton(onPressed: (){
-                      Navigator.pushNamed(context, AppRoutes.register);
-                    },
-                    color: ProjectColors.deepPurple,
-                  minWidth: double.infinity,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  height: 60,
-                  child: const Text("Confirm Payment",
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.register);
+                },
+                color: ProjectColors.deepPurple,
+                minWidth: double.infinity,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                height: 60,
+                child: const Text(
+                  "Confirm Payment",
                   style: TextStyle(
-                    color: ProjectColors.white,
-                    fontWeight: FontWeight.w200
-                  ),
-                  ),
-                  ),
-                  
+                      color: ProjectColors.white, fontWeight: FontWeight.w200),
+                ),
+              ),
             ],
           ),
         ),

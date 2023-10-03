@@ -15,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -55,7 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-
   Future<void> handleLogin() async {
     final email = _emailController.text;
     final password = _passwordController.text;
@@ -65,18 +64,13 @@ class _LoginScreenState extends State<LoginScreen> {
     if (data != null) {
       // Remember the user after successful login
       await rememberUser(email, password);
-      showSnackbar(
-          context, Colors.black, 'Login successful');
+      showSnackbar(context, Colors.black, 'Login successful');
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-          builder: (context) => ChatPage())
-    );
+          context, MaterialPageRoute(builder: (context) => const ChatPage()));
     } else {
       print('Login error');
       // Handle login error...
-      showSnackbar(
-          context, Colors.black, 'Login Failed - contact admin');
+      showSnackbar(context, Colors.black, 'Login Failed - contact admin');
     }
   }
 

@@ -45,40 +45,44 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ],
           ),
-
           Column(
-              children: [
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()));
-                },
-                color: Colors.white,
-                minWidth: double.infinity,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                height: 50,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Continue",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 24
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()));
+                  },
+                  color: Colors.white,
+                  minWidth: double.infinity,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  height: 50,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Continue",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 24),
                       ),
-                    ),
-                    Icon(Icons.arrow_forward, color: Colors.black,)
-                  ],
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ])
+            ],
+          )
         ],
       ),
     );

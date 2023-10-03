@@ -21,67 +21,71 @@ class RegisterScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("WELCOME",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: ProjectColors.black,
-                    fontSize: 30,
+                  Text(
+                    "WELCOME",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: ProjectColors.black,
+                      fontSize: 30,
+                    ),
                   ),
+                  SizedBox(
+                    height: 20,
                   ),
-                 SizedBox(height: 20,),
-                 Text("Automatic verification which makes you to verify your identity",
-                 textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ProjectColors.black,
-                    fontSize: 15,
-                  ),
+                  Text(
+                    "Automatic verification which makes you to verify your identity",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ProjectColors.black,
+                      fontSize: 15,
+                    ),
                   ),
                 ],
               ),
               Container(
-                height: MediaQuery.of(context).size.height/3,
+                height: MediaQuery.of(context).size.height / 3,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(image: AssetImage("images/verification.png"))
-                ),
+                    image: DecorationImage(
+                        image: AssetImage("images/verification.png"))),
               ),
               Column(
                 children: [
-                  MaterialButton(onPressed: (){
-                    Navigator.pushNamed(context, AppRoutes.login);
-                  },
-                  minWidth: double.infinity,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: Colors.grey
+                  MaterialButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.login);
+                    },
+                    minWidth: double.infinity,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    borderRadius: BorderRadius.circular(50),
+                    height: 60,
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(fontWeight: FontWeight.w200),
+                    ),
                   ),
-                  height: 60,
-                  child: const Text("Login",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w200
+                  const SizedBox(
+                    height: 20,
                   ),
-                  ),
-                  ),
-                  const SizedBox(height: 20,),
-                   MaterialButton(onPressed: (){
+                  MaterialButton(
+                    onPressed: () {
                       Navigator.pushNamed(context, AppRoutes.signup);
                     },
                     color: ProjectColors.deepPurple,
-                  minWidth: double.infinity,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
+                    minWidth: double.infinity,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    height: 60,
+                    child: const Text(
+                      "Sign up",
+                      style: TextStyle(
+                          color: ProjectColors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  height: 60,
-                  child: const Text("Sign up",
-                  style: TextStyle(
-                    color: ProjectColors.white,
-                    fontWeight: FontWeight.bold
-                  ),
-                  ),
-                  ),
-                
                 ],
               )
             ],
