@@ -5,8 +5,8 @@ import 'package:pepples_paper_review_ai/constants/colors.dart';
 import '../../provider/user.dart';
 
 class PaymentHng extends StatefulWidget {
-  const PaymentHng({super.key, required this.title});
-  final String title;
+  const PaymentHng({super.key});
+  // final String title;
   @override
   State<PaymentHng> createState() => _PaymentHngState();
 }
