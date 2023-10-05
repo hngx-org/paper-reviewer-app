@@ -24,7 +24,8 @@ class _PaymentHngState extends State<PaymentHng> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            pay.googlePay(amountToPay: '45'),
+            // TODO : ADD USER ID FROM API
+            pay.googlePay(context,amountToPay: '45',userID: '23'),
             const SizedBox(height: 40,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 90.0),
