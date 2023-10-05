@@ -7,4 +7,5 @@ class AppRoutes {
   static const payment = '/payment';
   static const paymentMehod = '/paymentMehod';
   static const history = '/history';
+  static const hngpayment = '/paymenthng';
 }

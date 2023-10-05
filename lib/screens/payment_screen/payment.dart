@@ -10,7 +10,7 @@ class PaymentScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: ProjectColors.black,
         appBar: AppBar(
-          title:Text("Choose your Payment Option"),
+          title: const Text("Choose your Payment Option"),
           centerTitle: true,
         ),
         body: Center(
@@ -33,7 +33,7 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.paymentMehod);
+                    Navigator.pushNamed(context, AppRoutes.hngpayment);
                   },
                   color: ProjectColors.black,
                   elevation: 0,
@@ -56,9 +56,10 @@ class PaymentScreen extends StatelessWidget {
                 const Text(
                   'Basic',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,
-                      color: ProjectColors.black
-                  ),
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: ProjectColors.black),
                 ),
                 const SizedBox(
                   height: 30,

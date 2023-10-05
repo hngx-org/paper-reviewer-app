@@ -26,6 +26,7 @@ class _PaymentHngState extends State<PaymentHng> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // pay.applePay(context, amountToPay: amountToPay, userID: userID)
             pay.googlePay(context,
                 amountToPay: '45', userID: Userdata().userdata.id),
             const SizedBox(
