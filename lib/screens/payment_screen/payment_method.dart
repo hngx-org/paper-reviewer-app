@@ -274,7 +274,7 @@ class _PaymentMehodScreenState extends State<PaymentMehodScreen> {
               ),
               MaterialButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.register);
+                 // Navigator.pushNamed(context, AppRoutes.register);
                 },
                 color: ProjectColors.deepPurple,
                 minWidth: double.infinity,

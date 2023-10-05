@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const PaymentScreen(),
-        '/firstScreen': (context) => const ChatPage(),
+        '/': (context) => const SplashScreen(),
+        '/firstScreen': (context) => const SplashScreen(),
         // '/secondScreen': (context) => SecondScreen(),
         // '/thirdScreen': (context) => ThirdScreen(),
       },

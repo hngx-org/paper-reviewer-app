@@ -22,6 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  bool _isLoading = false;
+
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +39,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  // SharedPreferences method to store user cookie
+
+  Future<void> storeUserCookie(String cookie) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_cookie', cookie);
+  }
+
+  // Remember user after a successfully signup
   Future<void> checkRememberedUser() async {
     final prefs = await SharedPreferences.getInstance();
     final rememberedEmail = prefs.getString('email');
@@ -49,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Directly navigate to the ChatPage
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const ChatPage(),
+          builder: (context) => const ChatScreen(),
         ),
       );
     }
@@ -62,7 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
     final authRepository = Authentication();
     final data = await authRepository.signIn(email, password);
 
+
     if (data != null) {
+      final cookie = data.cookie;
+      print('This is the user cooker: $cookie');
+
+      //Store the users cookie after a successful signup
+      await storeUserCookie(cookie);
       // Remember the user after successful login
       await rememberUser(email, password);
       showSnackbar(
@@ -70,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => ChatPage())
+              builder: (context) => const ChatScreen())
       );
     } else {
       print('Login error');
@@ -232,36 +249,58 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
 
                         // START: Login button
-                        MaterialButton(
-                          onPressed: () async {
-                            handleLogin();
-                          },
-                          color: Colors.black,
-                          minWidth: double.infinity,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          height: 50,
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Login",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24),
+                        Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black, // Set the button color to black
+                                borderRadius: BorderRadius.circular(50),
                               ),
-                              SizedBox(
-                                width: 5,
+                              child: MaterialButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    _isLoading = true; // Start loading
+                                  });
+                                  await handleLogin();
+                                  setState(() {
+                                    _isLoading = false; // Stop loading
+                                  });
+                                },
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Icon(
+                                      Icons.login,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Icon(
-                                Icons.login,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
+                            ),
+                            if (_isLoading) // Show loading indicator when _isLoading is true
+                              Container(
+                                width: double.infinity,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.8), // Semi-transparent black
+                                  borderRadius: BorderRadius.circular(50),),
+                                child: Center(
+                                  child: CircularProgressIndicator(  valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Set the color to white
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                         const SizedBox(
                           height: 20,
