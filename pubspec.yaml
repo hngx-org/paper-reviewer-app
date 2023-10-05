@@ -22,6 +22,11 @@ dependencies:
 #  hng_authentication: ^0.1.0
   hng_authentication: ^0.1.4
   provider: ^6.0.5
+  chat_bubbles:
+  hngx_openai:
+    git:
+      url: https://github.com/hngx-org/openai-package.git
+      ref: main
 
 dev_dependencies:
   flutter_test:

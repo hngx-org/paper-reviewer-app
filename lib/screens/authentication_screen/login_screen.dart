@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:hng_authentication/widgets/widget.dart';
-import 'package:pepples_paper_review_ai/models/user.dart';
-import 'package:pepples_paper_review_ai/provider/user.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/signup_screen.dart';
 import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
+import 'package:pepples_paper_review_ai/screens/payment_screen/payment_hng.dart';
+import 'package:pepples_paper_review_ai/screens/payment_screen/payment_method.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/colors.dart';
 // import '../../constants/routes/routes.dart';
@@ -17,12 +17,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final bool _obscurePassword = true;
+  bool _obscurePassword = true;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool _isLoading = false;
+
 
   @override
   void initState() {
@@ -38,6 +41,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  // SharedPreferences method to store user cookie
+
+  Future<void> storeUserCookie(String cookie) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_cookie', cookie);
+  }
+
+  // Remember user after a successfully signup
   Future<void> checkRememberedUser() async {
     final prefs = await SharedPreferences.getInstance();
     final rememberedEmail = prefs.getString('email');
@@ -51,33 +62,40 @@ class _LoginScreenState extends State<LoginScreen> {
       // Directly navigate to the ChatPage
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const ChatPage(),
+          builder: (context) => const ChatScreen(),
         ),
       );
     }
   }
+
 
   Future<void> handleLogin() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     final authRepository = Authentication();
     final data = await authRepository.signIn(email, password);
-    Userdata().updateUser(User(
-      id: data.id,
-      name: data.name,
-      email: data.email,
-    ));
+
 
     if (data != null) {
+      final cookie = data.cookie;
+      print('This is the user cooker: $cookie');
+
+      //Store the users cookie after a successful signup
+      await storeUserCookie(cookie);
       // Remember the user after successful login
       await rememberUser(email, password);
-      showSnackbar(context, Colors.black, 'Login successful');
+      showSnackbar(
+          context, Colors.black, 'Login successful');
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const ChatPage()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => const PaymentMehodScreen())
+      );
     } else {
       print('Login error');
       // Handle login error...
-      showSnackbar(context, Colors.black, 'Login Failed - contact admin');
+      showSnackbar(
+          context, Colors.black, 'Login Failed - contact admin');
     }
   }
 
@@ -124,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                  const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -233,36 +251,58 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
 
                         // START: Login button
-                        MaterialButton(
-                          onPressed: () async {
-                            handleLogin();
-                          },
-                          color: Colors.black,
-                          minWidth: double.infinity,
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          height: 50,
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Login",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24),
+                        Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black, // Set the button color to black
+                                borderRadius: BorderRadius.circular(50),
                               ),
-                              SizedBox(
-                                width: 5,
+                              child: MaterialButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    _isLoading = true; // Start loading
+                                  });
+                                  await handleLogin();
+                                  setState(() {
+                                    _isLoading = false; // Stop loading
+                                  });
+                                },
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Login",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Icon(
+                                      Icons.login,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Icon(
-                                Icons.login,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
+                            ),
+                            if (_isLoading) // Show loading indicator when _isLoading is true
+                              Container(
+                                width: double.infinity,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.8), // Semi-transparent black
+                                  borderRadius: BorderRadius.circular(50),),
+                                child: Center(
+                                  child: CircularProgressIndicator(  valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Set the color to white
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                         const SizedBox(
                           height: 20,

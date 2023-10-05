@@ -57,7 +57,7 @@ class PaymentScreen extends StatelessWidget {
                   'Basic',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,
-                  color: ProjectColors.black
+                      color: ProjectColors.black
                   ),
                 ),
                 const SizedBox(
