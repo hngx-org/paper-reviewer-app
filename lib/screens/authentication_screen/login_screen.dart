@@ -52,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> checkRememberedUser() async {
     final prefs = await SharedPreferences.getInstance();
     final rememberedEmail = prefs.getString('email');
+    
     final rememberedPassword = prefs.getString('password');
 
     if (rememberedEmail != null && rememberedPassword != null) {
@@ -74,11 +75,14 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text;
     final authRepository = Authentication();
     final data = await authRepository.signIn(email, password);
+    final prefs=await SharedPreferences.getInstance();
+    
 
 
     if (data != null) {
       final cookie = data.cookie;
       print('This is the user cooker: $cookie');
+    await prefs.setString('id', data.id);
 
       //Store the users cookie after a successful signup
       await storeUserCookie(cookie);
