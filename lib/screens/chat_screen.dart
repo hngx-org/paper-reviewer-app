@@ -22,7 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
   ScrollController scrollController = ScrollController();
   List<Message> messages = [];
   bool isTyping = false;
-  String _counter = "No Chat";
+  final String _counter = "No Chat";
 
   void _handleLogout() async {
     // Clear user data from SharedPreferences
@@ -34,19 +34,16 @@ class _ChatScreenState extends State<ChatScreen> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) =>
-        const SplashScreen(), // Replace with your login screen widget
+            const SplashScreen(), // Replace with your login screen widget
       ),
     );
   }
 
-
-
   void _incrementCounter() async {
-
     // Retrieve the user cookie from shared preferences
     final prefs = await SharedPreferences.getInstance();
-    final String? user_cookie = prefs.getString('user_cookie');
-    final String? cookie_user = user_cookie;
+    final String? userCookie = prefs.getString('user_cookie');
+    final String? cookieUser = userCookie;
 
     const String cookie =
         "session=ffec465a-f65f-4361-a3fe-405b7f74cd53.hA01CgZtBnU9yV3_BrdUfO7pj70";
@@ -56,21 +53,19 @@ class _ChatScreenState extends State<ChatScreen> {
 
     // Check if the user input is empty
     if (userInput.isNotEmpty) {
-
       // Instantiate OpenAIRepository
       OpenAIRepository openAI = OpenAIRepository();
 
       // For initiating a new chat
-      final aiResponse = await openAI.getChat(userInput, cookie_user!);
+      final aiResponse = await openAI.getChat(userInput, cookieUser!);
       // For getting chat completions
       List<String> history = ["What is my name", "How are you today?"];
       final response =
-      await openAI.getChatCompletions(history, userInput, cookie_user);
+          await openAI.getChatCompletions(history, userInput, cookieUser);
 
       // Create a new Message for the user's input and add it to messages
 
       messages.insert(0, Message(true, userInput));
-
 
       // Create a new Message for the AI response and add it to messages
       messages.insert(0, Message(false, aiResponse));
@@ -79,17 +74,14 @@ class _ChatScreenState extends State<ChatScreen> {
       controller.clear();
 
       // Update the UI
-        setState(() {
-          isTyping = true;
-          scrollController.animateTo(0.0,
-              duration: const Duration(seconds: 1), curve: Curves.easeOut);
-              isTyping = false;
-
+      setState(() {
+        isTyping = true;
+        scrollController.animateTo(0.0,
+            duration: const Duration(seconds: 1), curve: Curves.easeOut);
+        isTyping = false;
       });
     }
   }
-
-
 
   @override
   void dispose() {
@@ -104,6 +96,16 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ProjectColors.black,
+        leading: ElevatedButton.icon(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.black),
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/payment');
+          }, // Add this onPressed callback
+          icon: const Icon(Icons.upgrade),
+          label: const Text('Upgrade'),
+        ),
         actions: [
           ElevatedButton.icon(
             style: ButtonStyle(
@@ -166,7 +168,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         showCursor: true,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Enter the title of the paper and auther to review",
+                          hintText:
+                              "Enter the title of the paper and auther to review",
                         ),
                       ),
                     ),
