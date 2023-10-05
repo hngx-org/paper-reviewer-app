@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:hng_authentication/widgets/widget.dart';
+import 'package:pepples_paper_review_ai/models/user.dart';
+import 'package:pepples_paper_review_ai/provider/user.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/login_screen.dart';
 
 class RegistrationForm extends StatefulWidget {
@@ -34,10 +36,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Create your Paper Review \nAi account ✍",
               style: TextStyle(
                 fontSize: 28,
@@ -305,7 +307,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               final authRepository = Authentication();
                               final data = await authRepository.signUp(
                                   email, name, password);
+
                               if (data != null) {
+                                Userdata().updateUser(User(
+                                    id: data.id,
+                                    name: data.name,
+                                    email: data.email));
+
                                 // Registration failed, display an error message
                                 print('Registration not successful');
 
@@ -318,7 +326,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginScreen()));
+                                        builder: (context) =>
+                                            const LoginScreen()));
                               } else {
                                 print('errror:   eeeeeee');
                                 showSnackbar(
@@ -368,7 +377,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginScreen()));
+                                        builder: (context) =>
+                                            const LoginScreen()));
                               },
                               child: const Text(
                                 "Login Here",

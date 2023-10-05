@@ -2,30 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:in_app_payment/in_app_payment.dart';
 import 'package:pepples_paper_review_ai/constants/colors.dart';
 
+import '../../provider/user.dart';
+
 class PaymentHng extends StatefulWidget {
   const PaymentHng({super.key, required this.title});
- final String title;
+  final String title;
   @override
   State<PaymentHng> createState() => _PaymentHngState();
 }
 
 class _PaymentHngState extends State<PaymentHng> {
-   final pay = HNGPay();
+  final pay = HNGPay();
 
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor:  ProjectColors.white,
+      backgroundColor: ProjectColors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            pay.googlePay(amountToPay: '45'),
-            const SizedBox(height: 40,),
+            // TODO : ADD USER ID FROM API
+            pay.googlePay(context,
+                amountToPay: '45', userID: Userdata().userdata.id),
+            const SizedBox(
+              height: 40,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 90.0),
               child: GestureDetector(
@@ -39,7 +45,7 @@ class _PaymentHngState extends State<PaymentHng> {
                   child: const Text(
                     "Pay With Apple Pay",
                     style: TextStyle(
-                      color:ProjectColors.white,
+                      color: ProjectColors.white,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -53,6 +59,3 @@ class _PaymentHngState extends State<PaymentHng> {
     );
   }
 }
-
-
-
