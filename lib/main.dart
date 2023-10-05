@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(),
         '/firstScreen': (context) => const SplashScreen(),
+        '/payment':(context)=>const PaymentScreen(),
         // '/secondScreen': (context) => SecondScreen(),
         // '/thirdScreen': (context) => ThirdScreen(),
       },
