@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:hng_authentication/widgets/widget.dart';
+import 'package:pepples_paper_review_ai/models/user.dart';
+import 'package:pepples_paper_review_ai/provider/user.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/login_screen.dart';
 
 class RegistrationForm extends StatefulWidget {
@@ -303,9 +305,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               final password = widget.passwordController.text;
                               final name = widget.nameController.text;
                               final authRepository = Authentication();
-                              final data = await authRepository.signUp(
+                              final  data = await authRepository.signUp(
                                   email, name, password);
+
                               if (data != null) {
+    Userdata().updateUser(data);
+
                                 // Registration failed, display an error message
                                 print('Registration not successful');
 

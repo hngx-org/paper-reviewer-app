@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:hng_authentication/widgets/widget.dart';
+import 'package:pepples_paper_review_ai/provider/user.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/signup_screen.dart';
 import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,28 +56,24 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-
   Future<void> handleLogin() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     final authRepository = Authentication();
     final data = await authRepository.signIn(email, password);
+    Userdata().updateUser(data);
+
 
     if (data != null) {
       // Remember the user after successful login
       await rememberUser(email, password);
-      showSnackbar(
-          context, Colors.black, 'Login successful');
+      showSnackbar(context, Colors.black, 'Login successful');
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ChatPage())
-      );
+          context, MaterialPageRoute(builder: (context) => ChatPage()));
     } else {
       print('Login error');
       // Handle login error...
-      showSnackbar(
-          context, Colors.black, 'Login Failed - contact admin');
+      showSnackbar(context, Colors.black, 'Login Failed - contact admin');
     }
   }
 
@@ -123,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(
                 child: Container(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       color: Colors.white,
