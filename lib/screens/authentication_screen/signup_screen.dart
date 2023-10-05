@@ -36,10 +36,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Create your Paper Review \nAi account ✍",
               style: TextStyle(
                 fontSize: 28,
@@ -305,11 +305,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               final password = widget.passwordController.text;
                               final name = widget.nameController.text;
                               final authRepository = Authentication();
-                              final  data = await authRepository.signUp(
+                              final data = await authRepository.signUp(
                                   email, name, password);
 
                               if (data != null) {
-    Userdata().updateUser(data);
+                                Userdata().updateUser(User(
+                                    id: data.id,
+                                    name: data.name,
+                                    email: data.email));
 
                                 // Registration failed, display an error message
                                 print('Registration not successful');
@@ -323,7 +326,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginScreen()));
+                                        builder: (context) =>
+                                            const LoginScreen()));
                               } else {
                                 print('errror:   eeeeeee');
                                 showSnackbar(
@@ -373,7 +377,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => LoginScreen()));
+                                        builder: (context) =>
+                                            const LoginScreen()));
                               },
                               child: const Text(
                                 "Login Here",

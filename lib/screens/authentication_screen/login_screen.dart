@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:hng_authentication/widgets/widget.dart';
+import 'package:pepples_paper_review_ai/models/user.dart';
 import 'package:pepples_paper_review_ai/provider/user.dart';
 import 'package:pepples_paper_review_ai/screens/authentication_screen/signup_screen.dart';
 import 'package:pepples_paper_review_ai/screens/chat_screen.dart';
@@ -16,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -61,15 +62,18 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text;
     final authRepository = Authentication();
     final data = await authRepository.signIn(email, password);
-    Userdata().updateUser(data);
-
+    Userdata().updateUser(User(
+      id: data.id,
+      name: data.name,
+      email: data.email,
+    ));
 
     if (data != null) {
       // Remember the user after successful login
       await rememberUser(email, password);
       showSnackbar(context, Colors.black, 'Login successful');
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => ChatPage()));
+          context, MaterialPageRoute(builder: (context) => const ChatPage()));
     } else {
       print('Login error');
       // Handle login error...
