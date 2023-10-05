@@ -96,15 +96,16 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ProjectColors.black,
-        leading: ElevatedButton.icon(
+        centerTitle: true,
+        title: ElevatedButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.black),
+            backgroundColor: MaterialStateProperty.all(Colors.green),
           ),
           onPressed: () {
             Navigator.pushNamed(context, '/payment');
           }, // Add this onPressed callback
-          icon: const Icon(Icons.upgrade),
-          label: const Text('Upgrade'),
+          // icon: const Icon(Icons),
+          child: const Text('Upgrade'),
         ),
         actions: [
           ElevatedButton.icon(
