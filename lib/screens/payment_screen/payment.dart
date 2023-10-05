@@ -8,6 +8,11 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: ProjectColors.black,
+        appBar: AppBar(
+          title:Text("Choose your Payment Option"),
+          centerTitle: true,
+        ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -30,7 +35,7 @@ class PaymentScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.paymentMehod);
                   },
-                  color: ProjectColors.deepPurple,
+                  color: ProjectColors.black,
                   elevation: 0,
                   minWidth: double.infinity,
                   shape: RoundedRectangleBorder(
@@ -38,7 +43,7 @@ class PaymentScreen extends StatelessWidget {
                   ),
                   height: 60,
                   child: const Text(
-                    "Upgrade to Premium",
+                    " Get Premium",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: ProjectColors.white,
@@ -49,9 +54,11 @@ class PaymentScreen extends StatelessWidget {
                   height: 50,
                 ),
                 const Text(
-                  'Continue Free Trial',
+                  'Basic',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,
+                  color: ProjectColors.black
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -60,7 +67,7 @@ class PaymentScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.register);
                   },
-                  color: ProjectColors.deepPurple,
+                  color: ProjectColors.black,
                   minWidth: double.infinity,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -68,7 +75,7 @@ class PaymentScreen extends StatelessWidget {
                   ),
                   height: 60,
                   child: const Text(
-                    "Continue with Free Trial",
+                    "Start 14 day free Trial",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: ProjectColors.white,

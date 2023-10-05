@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   flutter_chat_ui: ^1.6.9
   font_awesome_flutter: ^10.5.0
-
+  in_app_payment: ^0.0.1
   cupertino_icons: ^1.0.2
   http: ^1.1.0
   shared_preferences: ^2.2.1
