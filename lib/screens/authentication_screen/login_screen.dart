@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _obscurePassword = true;
+  final bool _obscurePassword = true;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   bool _isLoading = false;
-
 
   @override
   void initState() {
@@ -52,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> checkRememberedUser() async {
     final prefs = await SharedPreferences.getInstance();
     final rememberedEmail = prefs.getString('email');
-    
+
     final rememberedPassword = prefs.getString('password');
 
     if (rememberedEmail != null && rememberedPassword != null) {
@@ -69,37 +68,29 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-
   Future<void> handleLogin() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     final authRepository = Authentication();
     final data = await authRepository.signIn(email, password);
-    final prefs=await SharedPreferences.getInstance();
-    
-
+    final prefs = await SharedPreferences.getInstance();
 
     if (data != null) {
       final cookie = data.cookie;
       print('This is the user cooker: $cookie');
-    await prefs.setString('id', data.id);
+      await prefs.setString('id', data.id);
 
       //Store the users cookie after a successful signup
       await storeUserCookie(cookie);
       // Remember the user after successful login
       await rememberUser(email, password);
-      showSnackbar(
-          context, Colors.black, 'Login successful');
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const PaymentMehodScreen())
-      );
+      showSnackbar(context, Colors.black, 'Login successful');
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const PaymentMehodScreen()));
     } else {
       print('Login error');
       // Handle login error...
-      showSnackbar(
-          context, Colors.black, 'Login Failed - contact admin');
+      showSnackbar(context, Colors.black, 'Login Failed - contact admin');
     }
   }
 
@@ -146,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Expanded(
                 child: Container(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -259,7 +250,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.black, // Set the button color to black
+                                color: Colors
+                                    .black, // Set the button color to black
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: MaterialButton(
@@ -299,10 +291,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: double.infinity,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.8), // Semi-transparent black
-                                  borderRadius: BorderRadius.circular(50),),
-                                child: Center(
-                                  child: CircularProgressIndicator(  valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Set the color to white
+                                  color: Colors.black.withOpacity(
+                                      0.8), // Semi-transparent black
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white), // Set the color to white
                                   ),
                                 ),
                               ),

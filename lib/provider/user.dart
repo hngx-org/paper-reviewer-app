@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:pepples_paper_review_ai/models/user.dart';
 
@@ -14,14 +11,14 @@ class Userdata extends ChangeNotifier {
   }
 
   Userdata._internal();
-  
 
-  
+  void init() {
+    userdata = User(email: "exe@gmail.com", name: "", id: "yst");
+    notifyListeners();
+  }
+
   void updateUser(User newuser) {
     userdata = newuser;
     notifyListeners();
   }
-
-  
-  
 }
