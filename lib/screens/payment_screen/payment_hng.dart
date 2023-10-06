@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:in_app_payment/in_app_payment.dart';
 import 'package:pepples_paper_review_ai/constants/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../provider/user.dart';
 
@@ -12,6 +13,22 @@ class PaymentHng extends StatefulWidget {
 }
 
 class _PaymentHngState extends State<PaymentHng> {
+  String? userid;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeSharedPreferences();
+  }
+
+  void initializeSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userid = prefs.getString("id");
+      print(userid);
+    });
+  }
+
   final pay = HNGPay();
 
   @override
@@ -28,7 +45,7 @@ class _PaymentHngState extends State<PaymentHng> {
           children: [
             // pay.applePay(context, amountToPay: amountToPay, userID: userID)
             pay.googlePay(context,
-                amountToPay: '45', userID: Userdata().userdata.id),
+                amountToPay: '45', userID: userid ?? Userdata().userdata.id),
             const SizedBox(
               height: 40,
             ),

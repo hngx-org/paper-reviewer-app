@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../constants/routes/routes.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           width: double.infinity,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -60,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               MaterialButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.payment);
+                  Navigator.pushNamed(context, AppRoutes.chat);
                 },
                 color: ProjectColors.deepPurple,
                 minWidth: double.infinity,
